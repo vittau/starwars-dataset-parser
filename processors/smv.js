@@ -1,10 +1,10 @@
 const _ = require("lodash");
 
+const getAgents = (nodes) => nodes.map(({ name }) => _.kebabCase(name));
+
 const setNumAgents = (nodes) => `num_agents := ${nodes.length};`;
 
 const setThreshold = (threshold) => `threshold := ${threshold}`;
-
-const getAgents = (nodes) => nodes.map(({ name }) => _.kebabCase(name));
 
 const setRelationships = (agents) => "-- TODO: setRelationships";
 
@@ -22,7 +22,7 @@ const nextSum = () => "-- TODO: nextSum";
 
 const setLTLSpecs = () => "-- TODO: setLTLSpecs";
 
-const parser = (network, threshold) => {
+const smvOutput = (network, threshold) => {
   const { nodes, links } = network;
 
   const agents = getAgents(nodes);
@@ -43,4 +43,4 @@ ASSIGN
 ${setLTLSpecs()}`;
 };
 
-module.exports = parser;
+module.exports = smvOutput;
