@@ -9,20 +9,24 @@ program.addOption(new Option("-o, --output <type>", "output type").choices(["smv
 program.parse(process.argv);
 
 const { file, threshold, output = "smv" } = program.opts();
-if (file) {
-  try {
-    if (fs.existsSync(file)) {
-      const parsed = JSON.parse(fs.readFileSync(file, "utf8"));
-      if (output === "smv") {
-        const out = smvOutput(parsed, threshold);
+
+try {
+  if (fs.existsSync(file)) {
+    const network = JSON.parse(fs.readFileSync(file, "utf8"));
+    switch (output) {
+      case "smv":
+        const out = smvOutput(network, threshold);
         console.log(out);
-      } else {
-        console.log("Graphviz output not implemented yet");
-      }
-    } else {
-      console.error(`File "${file}" not found`);
+        break;
+      case "graphviz":
+        console.info("Graphviz output not implemented yet");
+        break;
+      default:
+        console.error("Invalid output type");
     }
-  } catch (err) {
-    console.error(err);
+  } else {
+    console.error(`File "${file}" not found`);
   }
+} catch (err) {
+  console.error(err);
 }
