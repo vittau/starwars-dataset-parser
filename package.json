@@ -1,0 +1,20 @@
+{
+  "name": "starwars-dataset-parser",
+  "version": "1.0.0",
+  "description": "Parser for the \"Star Wars Social Network\" dataset from Kaggle into an SMV specification social network file",
+  "main": "index.js",
+  "repository": "https://github.com/vittau/starwars-dataset-parser.git",
+  "author": "Vitor Machado <vitor.p.mach@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "commander": "^7.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.24.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.3.1"
+  }
+}
