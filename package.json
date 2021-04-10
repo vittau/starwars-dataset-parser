@@ -2,7 +2,7 @@
   "name": "starwars-dataset-parser",
   "version": "1.0.0",
   "description": "Parser for the \"Star Wars Social Network\" dataset from Kaggle into an SMV specification social network file",
-  "main": "index.js",
+  "main": "sw2smv.js",
   "repository": "https://github.com/vittau/starwars-dataset-parser.git",
   "author": "Vitor Machado <vitor.p.mach@gmail.com>",
   "license": "MIT",
