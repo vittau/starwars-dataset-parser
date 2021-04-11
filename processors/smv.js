@@ -6,7 +6,25 @@ const setNumAgents = (nodes) => `num_agents := ${nodes.length};`;
 
 const setThreshold = (threshold) => `threshold := ${threshold}`;
 
-const setRelationships = (agents) => "-- TODO: setRelationships";
+const setRelationships = (numAgents, links) => {
+  // Initialize the matrix
+  const output = _.chunk(
+    _.range(numAgents * numAgents).map((i) => 0),
+    numAgents
+  );
+
+  // Fill the matrix with the weights
+  links.forEach(({ source, target, value }) => {
+    output[source][target] = value;
+    output[target][source] = value;
+  });
+
+  // Build the string
+  let result = "relationships := [\n    ";
+  result += output.map((row) => `[${row.toString()}]`).join(",\n    ") + "]";
+
+  return result;
+};
 
 const defineBehaviors = (agents) => `agents: array 0..${agents.length - 1} of {empty, alpha};`;
 
@@ -26,12 +44,13 @@ const smvOutput = (network, threshold) => {
   const { nodes, links } = network;
 
   const agents = getAgents(nodes);
+  const numAgents = agents.length;
 
   return `MODULE main
 DEFINE
   ${setNumAgents(nodes)}
   ${setThreshold(threshold)}
-  ${setRelationships(agents)}
+  ${setRelationships(numAgents, links)}
 VAR
   ${defineBehaviors(agents)}
   ${defineSum(agents)}
