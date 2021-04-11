@@ -1,6 +1,6 @@
 const _ = require("lodash");
 
-const getAgents = (nodes) => nodes.map(({ name }) => _.kebabCase(name));
+const getAgents = (nodes) => nodes.map(({ name }) => _.snakeCase(name));
 
 const setNumAgents = (nodes) => `num_agents := ${nodes.length};`;
 
