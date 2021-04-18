@@ -1,6 +1,6 @@
 const _ = require("lodash");
 
-const setThreshold = (threshold) => `threshold := ${threshold}`;
+const setThreshold = (threshold) => `threshold := ${threshold};`;
 
 const setRelationships = (numAgents, links) => {
   // Initialize the matrix
@@ -17,7 +17,7 @@ const setRelationships = (numAgents, links) => {
 
   // Build the string
   let result = "relationships := [\n    ";
-  result += output.map((row) => `[${row.toString()}]`).join(",\n    ") + "]";
+  result += output.map((row) => `[${row.toString()}]`).join(",\n    ") + "];";
 
   return result;
 };

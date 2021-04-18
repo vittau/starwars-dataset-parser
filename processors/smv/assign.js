@@ -24,7 +24,7 @@ const sumLine = (numAgents, type) => {
 
   const sums = agentIndexes.map((agentIndex) => {
     const line = innerSumLine(agentIndex, agentIndexes, type === "next");
-    return `${type}(agents_alpha[${agentIndex}]) := ${line};`;
+    return `${type}(agents_behavior[${agentIndex}]) := ${line};`;
   });
 
   return sums.join("\n  ");
