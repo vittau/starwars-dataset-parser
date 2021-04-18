@@ -1,7 +1,5 @@
 const _ = require("lodash");
 
-const getAgents = (nodes) => nodes.map(({ name }) => _.snakeCase(name));
-
 const setNumAgents = (nodes) => `num_agents := ${nodes.length};`;
 
 const setThreshold = (threshold) => `threshold := ${threshold}`;
@@ -26,11 +24,12 @@ const setRelationships = (numAgents, links) => {
   return result;
 };
 
-const defineBehaviors = (agents) => `agents: array 0..${agents.length - 1} of {empty, alpha};`;
+const defineBehaviors = (nodes) => `agents: array 0..${nodes.length - 1} of {empty, behavior};`;
 
-const defineSum = (agents) => `agents_alpha: array 0..${agents.length - 1} of real;`;
+const defineSum = (nodes) => `agents_behavior: array 0..${nodes.length - 1} of real;`;
 
-const initAgents = (agents) => agents.map((agent) => `init(${agent}) := empty;`).join("\n  ");
+const initAgents = (nodes) =>
+  nodes.map((node) => `init(${_.snakeCase(node.name)}) := ${node.behavior ? "behavior" : "empty"};`).join("\n  ");
 
 const initSum = () => "-- TODO: initSum";
 
@@ -43,8 +42,7 @@ const setLTLSpecs = () => "-- TODO: setLTLSpecs";
 const smvOutput = (network, threshold) => {
   const { nodes, links } = network;
 
-  const agents = getAgents(nodes);
-  const numAgents = agents.length;
+  const numAgents = nodes.length;
 
   return `MODULE main
 DEFINE
@@ -52,10 +50,10 @@ DEFINE
   ${setThreshold(threshold)}
   ${setRelationships(numAgents, links)}
 VAR
-  ${defineBehaviors(agents)}
-  ${defineSum(agents)}
+  ${defineBehaviors(nodes)}
+  ${defineSum(nodes)}
 ASSIGN
-  ${initAgents(agents)}
+  ${initAgents(nodes)}
   ${initSum()}
   ${nextBehaviors()}
   ${nextSum()}
