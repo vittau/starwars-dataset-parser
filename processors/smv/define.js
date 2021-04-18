@@ -1,7 +1,5 @@
 const _ = require("lodash");
 
-const setNumAgents = (nodes) => `num_agents := ${nodes.length};`;
-
 const setThreshold = (threshold) => `threshold := ${threshold}`;
 
 const setRelationships = (numAgents, links) => {
@@ -24,4 +22,4 @@ const setRelationships = (numAgents, links) => {
   return result;
 };
 
-module.exports = { setNumAgents, setThreshold, setRelationships };
+module.exports = { setThreshold, setRelationships };

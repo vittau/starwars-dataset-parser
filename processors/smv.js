@@ -1,18 +1,17 @@
 const _ = require("lodash");
 const { initAgents, initSum, nextBehaviors, nextSum } = require("./smv/assign");
-const { setNumAgents, setThreshold, setRelationships } = require("./smv/define");
+const { setThreshold, setRelationships } = require("./smv/define");
 const { defineBehaviors, defineSum } = require("./smv/var");
 
-const setLTLSpecs = () => "-- TODO: setLTLSpecs";
+const setLTLSpecs = (ltlspec) => `LTLSPEC ${ltlspec};`;
 
-const smvOutput = (network, threshold) => {
+const smvOutput = (network, threshold, ltlspec) => {
   const { nodes, links } = network;
 
   const numAgents = nodes.length;
 
   return `MODULE main
 DEFINE
-  ${setNumAgents(nodes)}
   ${setThreshold(threshold)}
   ${setRelationships(numAgents, links)}
 VAR
@@ -23,7 +22,7 @@ ASSIGN
   ${initSum(numAgents)}
   ${nextBehaviors(numAgents)}
   ${nextSum(numAgents)}
-${setLTLSpecs()}`;
+${ltlspec ? setLTLSpecs(ltlspec) : ""}`;
 };
 
 module.exports = smvOutput;

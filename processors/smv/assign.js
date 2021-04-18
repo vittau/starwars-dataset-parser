@@ -1,7 +1,12 @@
 const _ = require("lodash");
 
 const initAgents = (nodes) =>
-  nodes.map((node) => `init(${_.snakeCase(node.name)}) := ${node.behavior ? "behavior" : "empty"};`).join("\n  ");
+  nodes
+    .map(
+      (node, index) =>
+        `init(agents[${index}]) := ${node.behavior ? "behavior" : "empty"}; -- Agent "${_.snakeCase(node.name)}"`
+    )
+    .join("\n  ");
 
 const innerSumLine = (curAgentIndex, agentIndexes, hasNext) => {
   const line = agentIndexes.map(
