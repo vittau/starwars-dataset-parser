@@ -4,8 +4,16 @@ Parser for the "Star Wars Social Network" dataset from Kaggle into an SMV specif
 
 ## Usage
 
+For an explanation of the parameters, run:
+
 ```bash
-$ node sw2smv -f dataset\starwars-episode-4-interactions.json -t 0.3 -l "G F agents[8] = behavior" > output.smv
+$ node sw2smv -h
+```
+
+Example usage:
+
+```bash
+$ node sw2smv -f dataset\starwars-episode-4-interactions.json -t 0.3 -s -l "G F agents[8] = behavior" > output.smv
 ```
 
 ## Credits

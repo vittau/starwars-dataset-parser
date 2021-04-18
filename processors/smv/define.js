@@ -2,7 +2,7 @@ const _ = require("lodash");
 
 const setThreshold = (threshold) => `threshold := ${threshold};`;
 
-const setRelationships = (numAgents, links) => {
+const setRelationships = (numAgents, links, isSymmetric) => {
   // Initialize the matrix
   const output = _.chunk(
     _.range(numAgents * numAgents).map((i) => 0),
@@ -12,7 +12,9 @@ const setRelationships = (numAgents, links) => {
   // Fill the matrix with the weights
   links.forEach(({ source, target, value }) => {
     output[source][target] = value;
-    output[target][source] = value;
+    if (isSymmetric) {
+      output[target][source] = value;
+    }
   });
 
   // Build the string

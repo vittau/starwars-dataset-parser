@@ -7,16 +7,17 @@ program.requiredOption("-f, --file <file>", "Star Wars network file");
 program.requiredOption("-t, --threshold <number>", "The network adoption threshold");
 program.addOption(new Option("-o, --output <type>", "output type").choices(["smv", "graphviz"]));
 program.option("-l, --ltlspec <string>", "LTL specification for the nuXmv model checker");
+program.option("-s, --symmetric", "Relationships will be considered symmetric");
 program.parse(process.argv);
 
-const { file, threshold, output = "smv", ltlspec } = program.opts();
+const { file, threshold, output = "smv", ltlspec, symmetric = false } = program.opts();
 
 try {
   if (fs.existsSync(file)) {
     const network = JSON.parse(fs.readFileSync(file, "utf8"));
     switch (output) {
       case "smv":
-        const out = smvOutput(network, threshold, ltlspec);
+        const out = smvOutput(network, threshold, !!symmetric, ltlspec);
         console.log(out);
         break;
       case "graphviz":

@@ -5,7 +5,7 @@ const { defineBehaviors, defineSum } = require("./smv/var");
 
 const setLTLSpecs = (ltlspec) => `LTLSPEC ${ltlspec};`;
 
-const smvOutput = (network, threshold, ltlspec) => {
+const smvOutput = (network, threshold, isSymmetric, ltlspec) => {
   const { nodes, links } = network;
 
   const numAgents = nodes.length;
@@ -13,7 +13,7 @@ const smvOutput = (network, threshold, ltlspec) => {
   return `MODULE main
 DEFINE
   ${setThreshold(threshold)}
-  ${setRelationships(numAgents, links)}
+  ${setRelationships(numAgents, links, isSymmetric)}
 VAR
   ${defineBehaviors(numAgents)}
   ${defineSum(numAgents)}
