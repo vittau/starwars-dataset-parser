@@ -11,9 +11,13 @@ const setRelationships = (numAgents, links, isSymmetric) => {
 
   // Fill the matrix with the weights
   links.forEach(({ source, target, value }) => {
-    output[source][target] = value;
-    if (isSymmetric) {
-      output[target][source] = value;
+    if (output.length > source) {
+      if (output[source].length > target) {
+        output[source][target] = value;
+        if (isSymmetric) {
+          output[target][source] = value;
+        }
+      }
     }
   });
 
