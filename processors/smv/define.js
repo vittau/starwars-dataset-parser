@@ -1,29 +1,12 @@
 const _ = require("lodash");
 
-const setThreshold = (threshold) => `threshold := ${threshold};`;
+const setThreshold = (threshold_num, threshold_den) =>
+  `threshold_num := ${threshold_num};\n  threshold_den := ${threshold_den};`;
 
-const setRelationships = (numAgents, links, isSymmetric) => {
-  // Initialize the matrix
-  const output = _.chunk(
-    _.range(numAgents * numAgents).map((i) => 0),
-    numAgents
-  );
-
-  // Fill the matrix with the weights
-  links.forEach(({ source, target, value }) => {
-    if (output.length > source) {
-      if (output[source].length > target) {
-        output[source][target] = value;
-        if (isSymmetric) {
-          output[target][source] = value;
-        }
-      }
-    }
-  });
-
+const setRelationships = (linksMatrix) => {
   // Build the string
   let result = "relationships := [\n    ";
-  result += output.map((row) => `[${row.toString()}]`).join(",\n    ") + "];";
+  result += linksMatrix.map((row) => `[${row.toString()}]`).join(",\n    ") + "];";
 
   return result;
 };

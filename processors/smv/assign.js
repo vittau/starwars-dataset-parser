@@ -13,7 +13,7 @@ const innerSumLine = (curAgentIndex, agentIndexes, hasNext) => {
     (agentIndexInternal) =>
       `(${hasNext ? "next(" : ""}agents[${agentIndexInternal}]${
         hasNext ? ")" : ""
-      } = behavior ? relationships[${curAgentIndex}][${agentIndexInternal}] : 0.0)`
+      } = behavior ? relationships[${curAgentIndex}][${agentIndexInternal}] : 0)`
   );
 
   return line.join(" + ");
@@ -43,7 +43,7 @@ const nextBehaviors = (numAgents) => {
 
   const sums = agentIndexes.map((agentIndex) => {
     const line = innerNextBehaviorsLine(agentIndex, agentIndexes);
-    return `next(agents[${agentIndex}]) := agents_behavior[${agentIndex}] > (${line}) * threshold ? behavior : agents[${agentIndex}];`;
+    return `next(agents[${agentIndex}]) := threshold_den * agents_behavior[${agentIndex}] > (${line}) * threshold_num ? behavior : agents[${agentIndex}];`;
   });
 
   return sums.join("\n  ");
