@@ -16,6 +16,10 @@ Example usage:
 $ node sw2smv -f dataset\starwars-episode-4-interactions.json -t 0.3 -s -l "G F agents[8] = behavior" > output.smv
 ```
 
+```bash
+$ node sw2smv -f dataset\starwars-episode-4-interactions.json -s -o graphviz > output.dot
+```
+
 ## Credits
 
 - Includes a modified version of the file `starwars-episode-4-interactions.json` from [here](https://www.kaggle.com/ruchi798/star-wars).
