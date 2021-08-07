@@ -13,7 +13,7 @@ $ node sw2smv -h
 Example usage:
 
 ```bash
-$ node sw2smv -f dataset\starwars-episode-4-interactions.json -t 0.3 -s -l "G F agents[8] = behavior" > output.smv
+$ node sw2smv -f dataset\starwars-episode-4-interactions.json -tn 1 -td 3 -s -l "G F agents[8] = behavior" > output.smv
 ```
 
 ```bash
