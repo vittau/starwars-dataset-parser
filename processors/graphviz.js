@@ -23,8 +23,11 @@ const graphvizOutput = (network, isSymmetric) => {
   });
 
   return `strict ${isSymmetric ? "graph" : "digraph"} {
-    ${behaviorNodes(nodes)}
-    ${relationships(nodes, linksMatrix, isSymmetric)}}`;
+  // Nodes
+${behaviorNodes(nodes)}
+  // Relationships
+${relationships(nodes, linksMatrix, isSymmetric)}
+}`;
 };
 
 module.exports = graphvizOutput;

@@ -3,14 +3,9 @@ const filter = require("lodash/fp/filter");
 const flow = require("lodash/fp/flow");
 const snakeCase = require("lodash/fp/snakeCase");
 
-const behaviorNodes = (nodes) => {
-  const nodesStr = flow(
-    filter((node) => node.behavior),
-    map((node) => `${snakeCase(node.name)};`)
-  )(nodes);
-
-  return `node [style=filled,color=red];
-    ${nodesStr.join("")}`;
-};
+const behaviorNodes = (nodes) =>
+  nodes
+    .map((node) => `  ${snakeCase(node.name)} [label="${node.name}",${node.behavior ? "color=red" : "color=grey"}]`)
+    .join("\n");
 
 module.exports = { behaviorNodes };

@@ -5,16 +5,15 @@ const relationships = (nodes, links, isSymmetric) => {
     source
       .map(
         (value, tgtIdx) =>
-          `    ${snakeCase(nodes[srcIdx].name)} ${isSymmetric ? "--" : "->"} ${snakeCase(
+          `  ${snakeCase(nodes[srcIdx].name)} ${isSymmetric ? "--" : "->"} ${snakeCase(
             nodes[tgtIdx].name
-          )} [label=${value}]`
+          )} [weight=${value}]`
       )
-      .filter((line) => !line.includes("[label=0]"))
+      .filter((line) => !line.includes("[weight=0]"))
       .join("\n")
   );
 
-  return `node [style=filled,color=grey];
-${lines.filter((line) => line).join("\n")}`;
+  return lines.filter((line) => line).join("\n");
 };
 
 module.exports = { relationships };
